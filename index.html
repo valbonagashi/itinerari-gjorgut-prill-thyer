@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Itinerari i Gjorgut | Prilli i thyer</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Itinerari i Gjorgut në <em>Prilli i thyer</em></h1>
+      <p>Hartë interpretative e hapësirës narrative dhe e trashëgimisë jomateriale</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>Shënim metodologjik</h2>
+        <p>
+          Kjo hartë është interpretative dhe mbështetet në hapësirën narrative të romanit,
+          jo në një rindërtim topografik përfundimtar. Disa pika janë vendosur në mënyrë
+          afërsisht simbolike për të vizualizuar itinerarin letrar të Gjorgut.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Ndalesat kryesore</h2>
+        <ol id="place-list" class="place-list"></ol>
+      </section>
+
+      <section class="panel">
+        <h2>Legenda</h2>
+        <ul class="legend-list">
+          <li><span class="dot home"></span> Kullë / pikënisje</li>
+          <li><span class="dot violence"></span> Vend i vrasjes</li>
+          <li><span class="dot transit"></span> Rrugë / han / kalim</li>
+          <li><span class="dot canon"></span> Qendër zakonore</li>
+          <li><span class="dot tragic"></span> Hapësirë tragjike</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Qëllimi i hartës</h2>
+        <p>
+          Të paraqesë itinerarin e Gjorgut si një strukturë narrative ku artikulohen
+          elemente të trashëgimisë jomateriale shqiptare: Kanuni, besa, nderi,
+          mikpritja dhe kujtesa kolektive.
+        </p>
+      </section>
+    </aside>
+
+    <main class="map-area">
+      <div id="map"></div>
+      <div class="map-caption">
+        Figura 1. Hartë interpretative e itinerarit të Gjorgut në romanin <em>Prilli i thyer</em>.
+      </div>
+    </main>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin=""
+  ></script>
+  <script src="script.js"></script>
+</body>
+</html>
