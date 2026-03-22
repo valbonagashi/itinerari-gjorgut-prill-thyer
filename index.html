@@ -1,415 +1,93 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Itinerari i Gjorgut | Prilli i thyer</title>
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  />
-
-  <style>
-:root {
-  --bg: #f5f1e8;
-  --panel: #fffdf9;
-  --border: #d7cdbf;
-  --text: #1f1f1f;
-  --muted: #5d5d5d;
-  --accent: #5a3e2b;
-
-  --home: #2e7d32;
-  --violence: #b71c1c;
-  --transit: #1565c0;
-  --canon: #6a1b9a;
-  --tragic: #ef6c00;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  color: var(--text);
-  background: var(--bg);
-}
-
-.topbar {
-  background: #e9dfcf;
-  border-bottom: 1px solid var(--border);
-}
-
-.topbar-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 18px 20px;
-}
-
-.topbar h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: var(--accent);
-}
-
-.topbar p {
-  margin: 6px 0 0;
-  color: var(--muted);
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  min-height: calc(100vh - 92px);
-}
-
-.sidebar {
-  border-right: 1px solid var(--border);
-  background: #f0e7d8;
-  padding: 18px;
-  overflow-y: auto;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 15px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-}
-
-.panel h2 {
-  margin-top: 0;
-  font-size: 1.1rem;
-  color: var(--accent);
-}
-
-.panel p,
-.panel li {
-  line-height: 1.5;
-  font-size: 0.97rem;
-}
-
-.place-list {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.place-list li {
-  margin-bottom: 12px;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 6px;
-}
-
-.place-list li:hover {
-  background: #f3ece0;
-}
-
-.place-list .place-title {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.place-list .place-subtitle {
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.legend-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.legend-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 10px;
-  border: 1px solid rgba(0,0,0,0.2);
-}
-
-.dot.home { background: var(--home); }
-.dot.violence { background: var(--violence); }
-.dot.transit { background: var(--transit); }
-.dot.canon { background: var(--canon); }
-.dot.tragic { background: var(--tragic); }
-
-.map-area {
-  padding: 18px;
-}
-
-#map {
-  width: 100%;
-  height: calc(100vh - 155px);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.map-caption {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: var(--muted);
-}
-
-.leaflet-popup-content {
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
-.popup-title {
-  margin: 0 0 8px;
-  color: var(--accent);
-}
-
-.popup-type {
-  font-style: italic;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-@media (max-width: 960px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-
-  #map {
-    height: 70vh;
-  }
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerari i Gjorgut - Prilli i Thyer</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <h1>Itinerari i Gjorgut në <em>Prilli i thyer</em></h1>
-      <p>Hartë interpretative e hapësirës narrative dhe e trashëgimisë jomateriale</p>
+    <div id="container">
+        <!-- Header -->
+        <header>
+            <h1>Itinerari i Gjorgut</h1>
+            <h2>Nga "Prilli i Thyer" i Ismail Kadaresë</h2>
+            <p class="subtitle">Një udhëtim letrar nëpër Shqipërinë e Veriut</p>
+        </header>
+
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div id="intro">
+                <h3>Rreth projektit</h3>
+                <p><strong>"Prilli i Thyer"</strong> - Ismail Kadare (1978)</p>
+                <p>Udhëtimi tragjik i Gjorg Berishës nga Mnelë e Madhe në Orosh dhe kthimi fatal.</p>
+                
+                <div style="background:#ecf0f1;padding:1rem;border-radius:5px;margin:1rem 0;">
+                    <p><strong>⏱️ Kohëzgjatja:</strong> 30 ditë (Besa e Madhe)</p>
+                    <p><strong>📏 Distanca:</strong> ~80-100 km</p>
+                    <p><strong>📍 Zona:</strong> Mirdita, Shqipëria e Veriut</p>
+                </div>
+                
+                <blockquote style="border-left:4px solid #e74c3c;padding-left:1rem;font-style:italic;background:#f9f9f9;padding:1rem;">
+                    "Prilli kishte ardhur dhe po shkonte. Po thyhej. Ashtu si gjithçka tjetër."
+                    <cite style="display:block;margin-top:0.5rem;font-size:0.9rem;color:#666;">— Ismail Kadare</cite>
+                </blockquote>
+            </div>
+
+            <div id="timeline">
+                <h3>Pikat e Itinerarit</h3>
+                <ul id="location-list">
+                    <!-- Do të popullohet nga JavaScript -->
+                </ul>
+            </div>
+
+            <div id="chapter-info">
+                <h3>Informacion shtesë</h3>
+                <div id="chapter-content">
+                    <!-- Përmbajtja dinamike -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Harta -->
+        <main>
+            <div id="map"></div>
+            
+            <!-- Kontrollet e hartës -->
+            <div id="map-controls">
+                <button id="reset-view">🗺️ Shiko të gjithë itinerarin</button>
+                <button id="animate-route">▶️ Animoni rrugën</button>
+            </div>
+
+            <!-- Popup për informacion -->
+            <div id="info-panel" class="hidden">
+                <button id="close-panel">×</button>
+                <div id="info-content"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Projekt i realizuar për konferencën "Pasuritë e Shqipërisë" | Universiteti i Tiranës, 2026</p>
+            <p>Bazuar në romanin "Prilli i Thyer" © Ismail Kadare</p>
+        </footer>
     </div>
-  </header>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <section class="panel">
-        <h2>Shënim metodologjik</h2>
-        <p>
-          Kjo hartë është interpretative dhe mbështetet në hapësirën narrative të romanit,
-          jo në një rindërtim topografik përfundimtar. Disa pika janë vendosur në mënyrë
-          afërsisht simbolike për të vizualizuar itinerarin letrar të Gjorgut.
-        </p>
-      </section>
-
-      <section class="panel">
-        <h2>Ndalesat kryesore</h2>
-        <ol id="place-list" class="place-list"></ol>
-      </section>
-
-      <section class="panel">
-        <h2>Legenda</h2>
-        <ul class="legend-list">
-          <li><span class="dot home"></span> Kullë / pikënisje</li>
-          <li><span class="dot violence"></span> Vend i vrasjes</li>
-          <li><span class="dot transit"></span> Rrugë / han / kalim</li>
-          <li><span class="dot canon"></span> Qendër zakonore</li>
-          <li><span class="dot tragic"></span> Hapësirë tragjike</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2>Qëllimi i hartës</h2>
-        <p>
-          Të paraqesë itinerarin e Gjorgut si një strukturë narrative ku artikulohen
-          elemente të trashëgimisë jomateriale shqiptare: Kanuni, besa, nderi,
-          mikpritja dhe kujtesa kolektive.
-        </p>
-      </section>
-    </aside>
-
-    <main class="map-area">
-      <div id="map"></div>
-      <div class="map-caption">
-        Figura 1. Hartë interpretative e itinerarit të Gjorgut në romanin <em>Prilli i thyer</em>.
-      </div>
-    </main>
-  </div>
-
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    crossorigin=""
-  ></script>
-
-  <script>
-const map = L.map("map").setView([41.84, 19.98], 10);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap contributors"
-}).addTo(map);
-
-const places = [
-  {
-    id: 1,
-    name: "Kulla e Berishajve",
-    type: "home",
-    typeLabel: "Kullë / pikënisje",
-    coords: [41.87, 19.90],
-    short: "Pika e nisjes së fatit të Gjorgut.",
-    narrative: "Pikënisja e itinerarit dhe qendra e botës fisnore.",
-    heritage: "Fisi, nderi, organizimi familjar, përkatësia komunitare."
-  },
-  {
-    id: 2,
-    name: "Vendi i vrasjes së Zef Kryeqyqit",
-    type: "violence",
-    typeLabel: "Vend i vrasjes",
-    coords: [41.89, 19.96],
-    short: "Nyja që e fut personazhin në ciklin tragjik.",
-    narrative: "Momenti themelor që e vendos Gjorgun nën afatin e gjakmarrjes.",
-    heritage: "Kanuni, gjakmarrja, detyrimi zakonor, nderi."
-  },
-  {
-    id: 3,
-    name: "Rruga e malësisë",
-    type: "transit",
-    typeLabel: "Tranzit / rrugë",
-    coords: [41.86, 20.01],
-    short: "Hapësira e kalimit dhe e pritjes së fatit.",
-    narrative: "Rruga si trajektore e kohës së besës dhe e ekspozimit ndaj vdekjes.",
-    heritage: "Besa, kufijtë e lëvizjes, peizazhi kulturor malor."
-  },
-  {
-    id: 4,
-    name: "Hani",
-    type: "transit",
-    typeLabel: "Han / ndalesë",
-    coords: [41.84, 20.03],
-    short: "Hapësirë kalimtare e lajmit dhe e mikpritjes.",
-    narrative: "Nyje komunikimi ku ndërthuren udhëtimi individual dhe kodi kolektiv.",
-    heritage: "Mikpritja, etika e udhëtarit, komunikimi social."
-  },
-  {
-    id: 5,
-    name: "Oroshi",
-    type: "canon",
-    typeLabel: "Qendër zakonore",
-    coords: [41.81, 19.98],
-    short: "Qendra simbolike e rendit të Kanunit.",
-    narrative: "Institucionalizimi i gjakut dhe i fatit tragjik të personazhit.",
-    heritage: "Kanuni, besa, tatimi i gjakut, rendi juridiko-zakonor."
-  },
-  {
-    id: 6,
-    name: "Udhëkryqi",
-    type: "transit",
-    typeLabel: "Hapësirë kalimi",
-    coords: [41.79, 20.05],
-    short: "Figura e pasigurisë dhe e zgjedhjes së pamundur.",
-    narrative: "Pikë ku rruga merr vlerë simbolike si kufi dhe si ndarje botësh.",
-    heritage: "Topografia kulturore, kufiri simbolik, orientimi në territor."
-  },
-  {
-    id: 7,
-    name: "Hapësira e fundit tragjike",
-    type: "tragic",
-    typeLabel: "Përmbyllje tragjike",
-    coords: [41.76, 20.00],
-    short: "Pika e përmbushjes së fatit të Gjorgut.",
-    narrative: "Mbyllja e itinerarit dhe konsumimi i kohës tragjike.",
-    heritage: "Memoria kolektive, cikli i gjakmarrjes, fundi ritual i trajektores."
-  }
-];
-
-const colors = {
-  home: "#2e7d32",
-  violence: "#b71c1c",
-  transit: "#1565c0",
-  canon: "#6a1b9a",
-  tragic: "#ef6c00"
-};
-
-function createCircleIcon(color) {
-  return L.divIcon({
-    className: "custom-div-icon",
-    html: `
-      <div style="
-        background:${color};
-        width:18px;
-        height:18px;
-        border-radius:50%;
-        border:2px solid white;
-        box-shadow:0 0 4px rgba(0,0,0,0.35);
-      "></div>
-    `,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9],
-    popupAnchor: [0, -10]
-  });
-}
-
-const markers = [];
-
-places.forEach(place => {
-  const marker = L.marker(place.coords, {
-    icon: createCircleIcon(colors[place.type])
-  }).addTo(map);
-
-  marker.bindPopup(`
-    <div>
-      <h3 class="popup-title">${place.id}. ${place.name}</h3>
-      <div class="popup-type">${place.typeLabel}</div>
-      <p><strong>Funksioni narrativ:</strong> ${place.narrative}</p>
-      <p><strong>Trashëgimia jomateriale:</strong> ${place.heritage}</p>
-    </div>
-  `);
-
-  markers.push(marker);
-});
-
-const routeCoords = places.map(p => p.coords);
-
-L.polyline(routeCoords, {
-  color: "#1e4fa3",
-  weight: 4,
-  opacity: 0.85,
-  dashArray: "8, 6"
-}).addTo(map);
-
-map.fitBounds(routeCoords, { padding: [30, 30] });
-
-const placeList = document.getElementById("place-list");
-
-places.forEach((place, index) => {
-  const li = document.createElement("li");
-  li.innerHTML = `
-    <span class="place-title">${place.id}. ${place.name}</span>
-    <span class="place-subtitle">${place.short}</span>
-  `;
-
-  li.addEventListener("click", () => {
-    map.flyTo(place.coords, 12, { duration: 1.2 });
-    markers[index].openPopup();
-  });
-
-  placeList.appendChild(li);
-});
-  </script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/map.js"></script>
 </body>
 </html>
